@@ -14,7 +14,7 @@ jobs:
             docker image push jisack/node-service-cluster
             docker image push jisack/nginx-service-cluster
             ssh-keyscan -H 18.136.103.1 >> ~/.ssh/known_hosts
-            scp docker-stack.yml docker-swarmpit.yml nginx/nginx.conf ubuntu@18.138.58.130:~
+            scp docker-stack.yml docker-swarmpit.yml nginx/nginx.conf ubuntu@18.136.103.1:~
             ssh ubuntu@18.136.103.1 docker stack deploy -c docker-stack.yml backend-service
             # ssh ubuntu@18.138.58.130 docker service update --force web-frontend_nginx-swarm
 workflows:
