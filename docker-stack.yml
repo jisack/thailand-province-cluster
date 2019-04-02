@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  nginx: 
+    build: ./nginx
+    restart: on-failure
+    ports:
+      - 80:80
+  service:
+    image: jisack/node-service-cluster
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:8000

@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  service:
+    build: ./node-develop
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:8000
+    environment:
+      WAIT_HOSTS: mongo:27013
+  mongo:
+    image: mongo:4.0
+    volumes:
+      - ./mongo/db:/data/db
+    restart: always
+    ports:
+      - "27013:27017"

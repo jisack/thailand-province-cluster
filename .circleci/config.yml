@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build-and-push:
+    machine:
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run: 
+          name: Docker build and push to hub
+          command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker image build --tag jisack/node-service-cluster --file Dockerfile-pod .
+            docker image build --tag jisack/nginx-service-cluster ./nginx
+            docker image push jisack/node-service-cluster
+            docker image push jisack/nginx-service-cluster
+            ssh-keyscan -H 18.138.58.130 >> ~/.ssh/known_hosts
+            scp docker-stack.yml docker-swarmpit.yml nginx/nginx.conf ubuntu@18.138.58.130:~
+            ssh ubuntu@18.138.58.130 docker stack deploy -c docker-stack.yml backend-service
+            # ssh ubuntu@18.138.58.130 docker service update --force web-frontend_nginx-swarm
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-and-push
