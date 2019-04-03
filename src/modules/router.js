@@ -6,7 +6,7 @@ module.exports = server => {
       method: "GET",
       path: "/",
       handler: () => {
-        return "<h1>Welcome to Thailand Province and Amphur Service KUY!!!</h>";
+        return "<h1>Welcome to Thailand Province and Amphur Service REMOVE KUY!!!</h>";
       }
     },
     {
