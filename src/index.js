@@ -34,6 +34,16 @@ server.route([
     handler: (request, h) => {
       return { ok: true };
     }
+  },
+  {
+    method: "GET",
+    path: "/print-env",
+    handler: (request, h) => {
+      return {
+        db_name: process.env.DB_NAME,
+        db_host: process.env.DB_HOST
+      };
+    }
   }
 ]);
 

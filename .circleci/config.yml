@@ -9,7 +9,7 @@ jobs:
           name: Docker build and push to hub
           command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            echo $PORT | echo $HOST | docker image build -t jisack/node-service-cluster --file Dockerfile .
+            echo $DB_HOST | echo $DB_NAME | docker image build -t jisack/node-service-cluster --file Dockerfile .
             docker image build -t jisack/nginx-service-cluster ./nginx
             docker image push jisack/node-service-cluster
             docker image push jisack/nginx-service-cluster
