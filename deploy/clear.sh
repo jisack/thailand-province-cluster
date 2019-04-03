@@ -1,1 +1,1 @@
-docker stack deploy -c docker-swarm-monitor.yml backend-monitor
+docker stack rm backend-service backend-monitor

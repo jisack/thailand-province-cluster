@@ -15,6 +15,7 @@ jobs:
             docker image push jisack/nginx-service-cluster
             ssh-keyscan -H 18.136.103.1 >> ~/.ssh/known_hosts
             scp deploy/* nginx/nginx.conf ubuntu@18.136.103.1:~
+            ssh ubuntu@18.136.103.1 chmod
             ssh ubuntu@18.136.103.1 ./deploy.sh
 workflows:
   version: 2
