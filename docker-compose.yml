@@ -1,8 +1,12 @@
 version: "3"
 
 services:
+  nginx: 
+    build: ./nginx
+    ports:
+      - 80:80
   service:
-    build: ./node-develop
+    build: .
     working_dir: /app
     volumes:
       - ./:/app
