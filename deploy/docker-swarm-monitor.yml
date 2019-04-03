@@ -1,16 +1,5 @@
 version: '3.7'
 services:
-  visualizer:
-    image: dockersamples/visualizer
-    ports:
-      - "9999:8080"
-    restart: always
-    stop_grace_period: 1m30s
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
   swarm-dashboard:
       image: charypar/swarm-dashboard
       volumes:
