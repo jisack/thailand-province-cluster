@@ -5,10 +5,13 @@ services:
     image: jisack/nginx-service-cluster
     ports:
       - 80:80
+    environment:
+      WAIT_HOSTS: service:8000
     deploy:
       mode: replicated
       placement:
         constraints: [node.role == manager]
+    
   service:
     image: jisack/node-service-cluster
     ports:
