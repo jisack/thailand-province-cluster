@@ -5,7 +5,7 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: 
+      - run:
           name: Docker build and push to hub
           command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
