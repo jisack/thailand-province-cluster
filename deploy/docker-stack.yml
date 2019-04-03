@@ -11,9 +11,6 @@ services:
         constraints: [node.role == manager]
   service:
     image: jisack/node-service-cluster
-    working_dir: /app
-    volumes:
-      - ./:/app
     ports:
       - 8000:8000
     deploy:
@@ -24,8 +21,8 @@ services:
       #   max_attempts: 3
       placement:
         constraints: [node.role == worker]
-      # update_config: 
-      #   parallelism: 1
-      #   delay: 10s
-      #   failure_action: rollback
-      #   order: start-first
+      update_config: 
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
