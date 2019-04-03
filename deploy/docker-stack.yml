@@ -24,8 +24,8 @@ services:
       #   max_attempts: 3
       placement:
         constraints: [node.role == worker]
-      update_config: 
-        parallelism: 1
-        delay: 10s
-        failure_action: rollback
-        order: start-first
+      # update_config: 
+      #   parallelism: 1
+      #   delay: 10s
+      #   failure_action: rollback
+      #   order: start-first
