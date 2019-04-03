@@ -1,1 +1,1 @@
-docker stack rm backend-service backend-monitor
+docker stack rm backend-service backend-monitor backend-swarmpit
