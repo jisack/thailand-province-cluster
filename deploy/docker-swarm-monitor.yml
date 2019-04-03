@@ -34,9 +34,9 @@ services:
     security_opt:
       - apparmor:unconfined
     volumes:
-      - ./health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf
-      - ./alarm.conf:/etc/netdata/health.d/alarm.conf
-      - ./netdata.conf:/etc/netdata/netdata.conf
+      - ./netdata/health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf
+      - ./netdata/alarm.conf:/etc/netdata/health.d/alarm.conf
+      - ./netdata/netdata.conf:/etc/netdata/netdata.conf
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
