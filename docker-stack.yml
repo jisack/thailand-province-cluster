@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   nginx: 
-    build: jisack/nginx-service-cluster
+    image: jisack/nginx-service-cluster
     ports:
       - 80:80
     deploy:
