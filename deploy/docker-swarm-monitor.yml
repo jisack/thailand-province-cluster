@@ -1,0 +1,54 @@
+version: '3.7'
+services:
+  visualizer:
+    image: dockersamples/visualizer
+    ports:
+      - "9999:8080"
+    restart: always
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+  swarm-dashboard:
+      image: charypar/swarm-dashboard
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock"
+      ports:
+        - 7070:8080
+      environment:
+        PORT: 8080
+      deploy:
+        replicas: 1
+        placement:
+          constraints:
+            - node.role == manager
+  # docker-slack:
+  #   image: int128/slack-docker
+  #   restart: always
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   environment:
+  #     - webhook=https://hooks.slack.com/services/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
+  #   deploy:
+  #     mode: replicated
+  #     placement:
+  #       constraints: [node.role == manager]
+  netdata:
+    image: netdata/netdata
+    ports:
+      - 19999:19999
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    deploy:
+      mode: replicated
+      placement:
+        constraints: [node.role == manager]
