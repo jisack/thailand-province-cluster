@@ -8,8 +8,8 @@ require("dotenv").config({
 const router = require("./modules/router");
 
 const server = hapi.server({
-  port: process.env.PORT,
-  host: process.env.HOST,
+  port: 8000,
+  host: "0.0.0.0",
   routes: {
     cors: {
       origin: ["*"]
