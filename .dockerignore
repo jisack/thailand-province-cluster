@@ -5,3 +5,5 @@ node_modules
 .circleci
 nginx
 mongo
+deploy
+node-develop
