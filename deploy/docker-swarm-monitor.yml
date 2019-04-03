@@ -5,7 +5,7 @@ services:
       volumes:
         - "/var/run/docker.sock:/var/run/docker.sock"
       ports:
-        - 7070:8080
+        - 9999:8080
       environment:
         PORT: 8080
       deploy:
@@ -13,17 +13,17 @@ services:
         placement:
           constraints:
             - node.role == manager
-  # docker-slack:
-  #   image: int128/slack-docker
-  #   restart: always
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   environment:
-  #     - webhook=https://hooks.slack.com/services/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
-  #   deploy:
-  #     mode: replicated
-  #     placement:
-  #       constraints: [node.role == manager]
+  docker-slack:
+    image: int128/slack-docker
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - webhook=https://hooks.slack.com/services/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
+    deploy:
+      mode: replicated
+      placement:
+        constraints: [node.role == manager]
   netdata:
     image: netdata/netdata
     ports:
@@ -34,6 +34,7 @@ services:
     security_opt:
       - apparmor:unconfined
     volumes:
+      - ./health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
