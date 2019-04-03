@@ -20,6 +20,23 @@ const server = hapi.server({
   }
 });
 
+server.route([
+  {
+    method: "GET",
+    path: "/null",
+    handler: (request, h) => {
+      process.exit(1);
+    }
+  },
+  {
+    method: "GET",
+    path: "/health",
+    handler: (request, h) => {
+      return { ok: true };
+    }
+  }
+]);
+
 const init = async () => {
   await router(server);
   await server.start();
