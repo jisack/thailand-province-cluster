@@ -27,7 +27,7 @@ services:
   netdata:
     image: netdata/netdata
     ports:
-      - 19999:19999
+      - 20251:19999
     restart: always
     cap_add:
       - SYS_PTRACE
